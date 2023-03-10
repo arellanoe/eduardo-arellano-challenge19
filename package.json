@@ -1,8 +1,8 @@
 {
-	"name": "JATE",
-	"version": "1.0.0",
-	"description": "",
-	"main": "server.js",
+  "name": "controllers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
 	"scripts": {
 		"start:dev": "concurrently \"cd client && npm run build\" \"cd server && npm run server\"",
 		"start": "npm run build && cd server && node server.js",
@@ -12,14 +12,13 @@
 		"client": "cd client && npm start"
 	},
 	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"express": "^4.17.1",
-		"if-env": "^1.0.4"
-	},
-	"devDependencies": {
-		"concurrently": "^5.2.0",
-		"nodemon": "^2.0.4"
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.1"
+  }
 	}
 }
