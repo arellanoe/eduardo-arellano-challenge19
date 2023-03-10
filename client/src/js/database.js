@@ -1,39 +1,52 @@
-import { openDB } from 'idb';
+import { openDB as openIndexedDB } from 'idb';
 
-// Create database
-const initdb = async () =>
-	openDB('jate', 1, {
-		upgrade(db) {
-			if (db.objectStoreNames.contains('jate')) {
-				console.log('jate database already exists');
-				return;
-			}
-			db.createObjectStore('jate', {
-				keyPath: 'id',
-				autoIncrement: true,
-			});
-			console.log('jate database created');
-		},
-	});
+const databaseName = 'jate-db';
+const databaseVersion = 1;
+const objectStoreName = 'jate-store';
 
-// Add text to indexedDB
-export const putDb = async (content) => {
-	const jateDB = await openDB('jate', 1);
-	const tx = jateDB.transaction('jate', 'readwrite');
-	const store = tx.objectStore('jate');
-	const request = store.put({ id: 1, value: content });
-	const result = await request;
-	console.log(result);
+const initializeDatabase = async () => {
+  try {
+    const jateDB = await openIndexedDB(databaseName, databaseVersion, {
+      upgrade(database) {
+        if (database.objectStoreNames.contains(objectStoreName)) {
+          console.log('J.A.T.E database already exists.');
+          return;
+        }
+
+        database.createObjectStore(objectStoreName, { keyPath: 'id', autoIncrement: true });
+        console.log('J.A.T.E database created.');
+      },
+    });
+    return jateDB;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-// Retrieve text from indexedDB
-export const getDb = async (e) => {
-	const jateDb = await openDB('jate', 1);
-	const tx = jateDb.transaction('jate', 'readonly');
-	const store = tx.objectStore('jate');
-	const request = store.get(1);
-	const result = await request;
-	return result?.value;
+const addTextToIndexedDB = async (content) => {
+  try {
+    const jateDB = await initializeDatabase();
+    const transaction = jateDB.transaction(objectStoreName, 'readwrite');
+    const store = transaction.objectStore(objectStoreName);
+    const request = store.put({ id: 1, value: content });
+    const result = await request;
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-initdb();
+const retrieveTextFromIndexedDB = async (e) => {
+  try {
+    const jateDB = await initializeDatabase();
+    const transaction = jateDB.transaction(objectStoreName, 'readonly');
+    const store = transaction.objectStore(objectStoreName);
+    const request = store.get(1);
+    const result = await request;
+    return result?.value;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+initializeDatabase();
