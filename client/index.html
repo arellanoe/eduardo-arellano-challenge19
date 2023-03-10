@@ -5,29 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>J.A.T.E</title>
     
-      <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
-      </link>
-      <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js">
-      </script>
-      <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js">
-      </script>
-      <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css">
-      </link>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
+    </link>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js">
+    </script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js">
+    </script>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css">
+    </link>
+    
+    <style>
+      /* Custom styles for the navbar */
+      #navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem;
+        background-color: #333;
+        color: #fff;
+      }
+
+      .nav-btn {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        margin: 0.5rem;
+        font-size: 1rem;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .btn-dark {
+        background-color: #343a40;
+        border-color: #343a40;
+      }
+
+      /* Custom styles for the main content */
+      #main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f8f9fa;
+      }
+
+      .loading-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loading-spinner {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #333;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
     <nav id="navbar">
       <div class="nav-btn">
-        <a class="btn btn-sm btn-dark" id="buttonInstall" role="button">Install!</a>
+        <a class="btn btn-sm btn-dark" id="install-button" role="button">Install!</a>
       </div>
-     <h1> Just Another Text Editor</h1>
-     
-      <div class="navbar-brand" 
-            ><img src="./assets/icons/icon_96x96.png"
-          /></div>
+      <h1>Just Another Text Editor</h1>
+      <div class="navbar-brand">
+        <img src="./assets/icons/icon_96x96.png" alt="Logo">
+      </div>
     </nav>
 
     <main id="main">
